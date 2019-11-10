@@ -1,17 +1,7 @@
 <?php
 
-use Phalcon\Mvc\View;
-use Phalcon\Mvc\View\Engine\Volt;
+use Phalcon\Init\Dashboard\Infrastructure\Repositories\IdeasRepository;
 
-$di['view'] = function () {
-    $view = new View();
-    $view->setViewsDir(__DIR__ . '/../views/');
-
-    $view->registerEngines(
-        [
-            ".volt" => "voltService",
-        ]
-    );
-
-    return $view;
-};
+$di->setShared('ideasRepository', function () {
+    return new IdeasRepository();
+});

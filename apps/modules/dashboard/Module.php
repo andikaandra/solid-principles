@@ -5,6 +5,8 @@ namespace Phalcon\Init\Dashboard;
 use Phalcon\DiInterface;
 use Phalcon\Loader;
 use Phalcon\Mvc\ModuleDefinitionInterface;
+use Phalcon\Mvc\View;
+use Phalcon\Mvc\View\Engine\Volt;
 
 class Module implements ModuleDefinitionInterface
 {
@@ -16,6 +18,9 @@ class Module implements ModuleDefinitionInterface
             'Phalcon\Init\Dashboard\Controllers\Web' => __DIR__ . '/controllers/web',
             'Phalcon\Init\Dashboard\Controllers\Api' => __DIR__ . '/controllers/api',
             'Phalcon\Init\Dashboard\Models' => __DIR__ . '/models',
+            'Phalcon\Init\Dashboard\Domain\Contracts\Repositories' => __DIR__ .'/core/domain/repositories',
+            'Phalcon\Init\Dashboard\UseCases' => __DIR__ .'/core/usecases',
+            'Phalcon\Init\Dashboard\Infrastructure\Repositories' => __DIR__ .'/core/infrastructure/repositories',
         ]);
 
         $loader->register();
@@ -23,10 +28,21 @@ class Module implements ModuleDefinitionInterface
 
     public function registerServices(DiInterface $di = null)
     {
-        $moduleConfig = require __DIR__ . '/config/config.php';
+        // $moduleConfig = require __DIR__ . '/config/config.php';
 
-        $di->get('config')->merge($moduleConfig);
+        // $di->get('config')->merge($moduleConfig);
+        $di['view'] = function () {
+            $view = new View();
+            $view->setViewsDir(__DIR__ . '/views/');
 
+            $view->registerEngines(
+                [
+                    ".volt" => "voltService",
+                ]
+            );
+
+            return $view;
+        };
         include_once __DIR__ . '/config/services.php';
     }
 }
