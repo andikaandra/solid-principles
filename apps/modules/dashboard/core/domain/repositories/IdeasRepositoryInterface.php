@@ -4,5 +4,6 @@ namespace Phalcon\Init\Dashboard\Domain\Contracts\Repositories;
 
 interface IdeasRepositoryInterface
 {
-    public function addNewIdea($description);
+    public function addNewIdea($title, $description, $authorId);
+    public function allIdea();
 }

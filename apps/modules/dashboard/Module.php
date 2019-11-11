@@ -21,6 +21,8 @@ class Module implements ModuleDefinitionInterface
             'Phalcon\Init\Dashboard\Domain\Contracts\Repositories' => __DIR__ .'/core/domain/repositories',
             'Phalcon\Init\Dashboard\UseCases' => __DIR__ .'/core/usecases',
             'Phalcon\Init\Dashboard\Infrastructure\Repositories' => __DIR__ .'/core/infrastructure/repositories',
+            'Phalcon\Init\Dashboard\Infrastructure\Dto' => __DIR__ .'/core/infrastructure/dto',
+            'Phalcon\Init\Dashboard\Infrastructure\ViewModels' => __DIR__ .'/core/infrastructure/viewmodel',
         ]);
 
         $loader->register();

@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
 
-        <title>Dashboard &bullet; KPL</title>
+        <title>{% block title %}{% endblock %} &bullet; KPL</title>
 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -12,30 +12,18 @@
 
         </style>
 
-        
-    <style>
-
-    </style>
-
+        {% block styles %}{% endblock %}
     </head>
     <body>
         <nav class="navbar navbar-dark bg-dark">
-            <a class="navbar-brand" href="<?= $this->url->get('') ?>">
+            <a class="navbar-brand" href="{{url('')}}">
                 KPL
             </a>
         </nav>
         <div class="container mt-3">
             <div class="row">
                 <div class="col">
-                    
-    <p><?php $this->flashSession->output() ?></p>
-    <div class="list-group">
-        <a href="<?= $this->url->get('dashboard/author/new') ?>" class="list-group-item list-group-item-action">Register</a>
-        <a href="<?= $this->url->get('dashboard/author/login') ?>" class="list-group-item list-group-item-action">Login</a>
-        <a href="<?= $this->url->get('dashboard/idea/new') ?>" class="list-group-item list-group-item-action">New Idea</a>
-        <a href="<?= $this->url->get('dashboard/idea/all') ?>" class="list-group-item list-group-item-action">All Idea</a>
-    </div>
-
+                    {% block content %}{% endblock %}
                 </div>
             </div>
         </div>
@@ -44,12 +32,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-        
-    <script type="application/javascript">
-        $(document).ready(function() {
-
-        });
-    </script>
-
+        {% block scripts %}{% endblock %}
     </body>
 </html>

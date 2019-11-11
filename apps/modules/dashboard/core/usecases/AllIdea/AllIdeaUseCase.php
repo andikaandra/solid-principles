@@ -1,10 +1,10 @@
 <?php
 
-namespace Phalcon\Init\Dashboard\UseCases\AddIdea;
+namespace Phalcon\Init\Dashboard\UseCases\AllIdea;
 
 use Phalcon\Init\Dashboard\Domain\Contracts\Repositories\IdeasRepositoryInterface;
 
-class AddIdeaUseCase
+class AllIdeaUseCase
 {
     protected $repository;
 
@@ -13,8 +13,8 @@ class AddIdeaUseCase
         $this->repository = $repository;
     }
 
-    public function execute($description)
+    public function execute()
     {
-        return $this->repository->addNewIdea($description);
+        return $this->repository->allIdea();
     }
 }
