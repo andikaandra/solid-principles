@@ -2,6 +2,8 @@
 
 use Phalcon\Init\Dashboard\Infrastructure\Repositories\AuthorsRepository;
 use Phalcon\Init\Dashboard\Infrastructure\Repositories\IdeasRepository;
+use Phalcon\Init\Dashboard\Infrastructure\Services\MailerService;
+use Phalcon\Init\Dashboard\Infrastructure\Services\SwiftMailer;
 use Phalcon\Init\Dashboard\UseCases\AddAuthor\AddAuthorUseCase;
 use Phalcon\Init\Dashboard\UseCases\AddIdea\AddIdeaUseCase;
 use Phalcon\Init\Dashboard\UseCases\AllIdea\AllIdeaUseCase;
@@ -43,9 +45,28 @@ $di->setShared('allIdeaUc', function () use ($di) {
 });
 
 $di->setShared('rateIdeaUc', function () use ($di) {
-    return new RateIdeaUseCase($di->get('ideasRepository'));
+    return new RateIdeaUseCase($di->get('ideasRepository'), $di->get('mailerService'));
 });
 
+
+$di->set('swiftMailerTransport', function ()  use ($di) {
+    $config = $di->get('config');
+    $transport = (new Swift_SmtpTransport($config->mail->smtp->server, $config->mail->smtp->port))
+        ->setUsername($config->mail->smtp->username)
+        ->setPassword($config->mail->smtp->password);
+
+    return $transport;
+});
+
+$di->set('swiftMailer', function () use ($di) {
+    $mailer = new Swift_Mailer($di->get('swiftMailerTransport'));
+
+    return new SwiftMailer($mailer);
+});
+
+$di->set('mailerService', function () use ($di) {
+   return new MailerService($di->get('swiftMailer'));
+});
 
 // phalcon library 
 $di->set('request', function () {

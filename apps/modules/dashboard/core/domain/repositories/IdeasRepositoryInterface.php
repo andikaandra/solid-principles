@@ -8,4 +8,5 @@ interface IdeasRepositoryInterface
     public function allIdea();
     public function findIdea($ideaId);
     public function rateIdea($ideaId, $rating, $vote);
+    public function findAuthorByIdeaId($ideaId);
 }

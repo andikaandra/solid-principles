@@ -20,7 +20,7 @@ class AddIdeaUseCase
         $authorId = $request->getAuthorId();
         try {
             $response = $this->repository->addNewIdea($title, $description, $authorId);
-            return new AddIdeaResponse($response);
+            return new AddIdeaResponse("Idea successfully added.");
         } catch (\Exception $exception) {
             return new AddIdeaResponse($exception->getMessage(), TRUE);
         }

@@ -23,6 +23,18 @@ return new Config(
             'cacheDir' => APP_PATH . "/cache/",
         ],
 
+        'mail' => [
+            'fromName'      => getenv('MAIL_FROM_NAME'),
+            'fromEmail'     => getenv('MAIL_FROM_EMAIL'),
+            'smtp' => [
+                'server'    => getenv('MAIL_SMTP_SERVER'),
+                'port'      => getenv('MAIL_SMTP_PORT'),
+                'security'  => getenv('MAIL_SMTP_SECURITY'),
+                'username'  => getenv('MAIL_SMTP_USERNAME'),
+                'password'  => getenv('MAIL_SMTP_PASSWORD'),
+            ]
+        ],
+
         'version' => '0.1',
     ]
 );

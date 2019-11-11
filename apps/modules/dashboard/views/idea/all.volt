@@ -3,7 +3,6 @@
 {% block title %}All Idea{% endblock %}
 
 {% block styles %}
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <style>
         @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
         .starrating > input {display: none;}
@@ -51,11 +50,35 @@
                     <td>{{ idea.getAuthorName() }}</td>
                     <td>
                         <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
-                            <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
-                            <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
-                            <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
-                            <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
-                            <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+                            {% if idea.getRating() >=5 %}
+                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star" style="color: #ffca08"></label>
+                            {% else %}
+                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
+                            {% endif %}
+
+                            {% if idea.getRating() >=4 %}
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star" style="color: #ffca08"></label>
+                            {% else %}
+                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
+                            {% endif %}
+
+                            {% if idea.getRating() >=3 %}
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star" style="color: #ffca08"></label>
+                            {% else %}
+                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
+                            {% endif %}
+
+                            {% if idea.getRating() >=2 %}
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star" style="color: #ffca08"></label>
+                            {% else %}
+                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
+                            {% endif %}
+
+                            {% if idea.getRating() >=1 %}
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star" style="color: #ffca08"></label>
+                            {% else %}
+                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+                            {% endif %}
                         </div>
                     </td>
                 </tr>
@@ -65,6 +88,7 @@
 {% endblock %}
 
 {% block scripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha256-KsRuvuRtUVvobe66OFtOQfjP8WA2SzYsmm4VPfMnxms=" crossorigin="anonymous"></script>
     <script type="application/javascript">
         $(document).ready(function() {
             $('input[name ="rating"]').click(function() {
@@ -73,7 +97,8 @@
                 let data = {
                     'rating' : rate,
                     'idea_id' : idea_id,
-                }
+                };
+
                 $.ajax({
                     url: "{{ url('dashboard/idea/rate') }}",
                     type: 'POST',
@@ -83,7 +108,7 @@
                             alert(res.error)
                             return
                         }
-                        alert(res.data)
+                        swal ( "Success" ,  res.data ,  "success" );
                     }
                 });
             })

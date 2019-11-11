@@ -20,7 +20,7 @@
             <a href="{{url('dashboard/author/login')}}" class="list-group-item list-group-item-action">Login</a>
         {% endif %}
         <a href="{{url('dashboard/idea/new')}}" class="list-group-item list-group-item-action">New Idea</a>
-        <a href="{{url('dashboard/idea/all')}}" class="list-group-item list-group-item-action">All Idea</a>
+        <a href="{{url('dashboard/idea/all')}}" class="list-group-item list-group-item-action">All Ideas</a>
     </div>
 {% endblock %}
 

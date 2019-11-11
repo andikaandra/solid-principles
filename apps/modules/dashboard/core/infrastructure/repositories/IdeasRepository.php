@@ -4,6 +4,7 @@ namespace Phalcon\Init\Dashboard\Infrastructure\Repositories;
 
 use Phalcon\Init\Dashboard\Domain\Contracts\Repositories\IdeasRepositoryInterface;
 use Phalcon\Init\Dashboard\Infrastructure\Dto\AllIdeasDto;
+use Phalcon\Init\Dashboard\Infrastructure\Dto\AuthorDto;
 use Phalcon\Init\Dashboard\Infrastructure\Dto\IdeaData;
 use PDO;
 use Phalcon\Di;
@@ -35,6 +36,7 @@ class IdeasRepository implements IdeasRepositoryInterface
         $query = sprintf("SELECT idea.*, author.name as author_name FROM idea INNER JOIN author ON idea.author_id = author.author_id");
 
         $ideas = $this->dbManager->query($query)->fetchAll(PDO::FETCH_ASSOC);
+
         return new AllIdeasDto($ideas);
     }
 
@@ -59,7 +61,17 @@ class IdeasRepository implements IdeasRepositoryInterface
             'vote' => $vote,
             'idea_id' => $ideaId
         ];
-        
+
         return $this->dbManager->execute($query, $params);
+    }
+
+    public function findAuthorByIdeaId($ideaId)
+    {
+        $query = sprintf("SELECT * FROM author INNER JOIN idea ON idea.author_id = author.author_id WHERE idea.idea_id = :idea_id");
+        $param = ['idea_id' => $ideaId];
+
+        $data = $this->dbManager->query($query, $param)->fetch(PDO::FETCH_ASSOC);
+
+        return new AuthorDto($data['author_id'], $data['name'], $data['email']);
     }
 }

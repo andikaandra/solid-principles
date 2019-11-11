@@ -24,7 +24,7 @@ class AddAuthorUseCase
         }
         try {
             $response = $this->repository->addNewAuthor($name, $email, $password);
-            return new AddAuthorResponse($response);
+            return new AddAuthorResponse("Author registration successful.");
         } catch (\Exception $exception) {
             return new AddAuthorResponse($exception->getMessage(), TRUE);
         }

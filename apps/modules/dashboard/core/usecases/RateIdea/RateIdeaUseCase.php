@@ -3,14 +3,18 @@
 namespace Phalcon\Init\Dashboard\UseCases\RateIdea;
 
 use Phalcon\Init\Dashboard\Domain\Contracts\Repositories\IdeasRepositoryInterface;
+use Phalcon\Init\Dashboard\Infrastructure\Services\Contracts\MailerServiceInterface;
+use Phalcon\Init\Dashboard\Infrastructure\Services\MailerService;
 
 class RateIdeaUseCase
 {
     protected $repository;
+    protected $mailerService;
 
-    public function __construct(IdeasRepositoryInterface $repository)
+    public function __construct(IdeasRepositoryInterface $repository, MailerServiceInterface $mailerService)
     {
         $this->repository = $repository;
+        $this->mailerService = $mailerService;
     }
 
     public function execute(RateIdeaRequest $request) : RateIdeaResponse
@@ -23,11 +27,16 @@ class RateIdeaUseCase
             if ($idea->getId()) {
                 // tologn cek float 
                 $vote = $idea->getVote();
-                $newRating = (float) ($idea->getRating() * $vote + $rating) / (float) ($vote+1);
+                $newRating = (float) ( (float) $idea->getRating() * (int)$vote + (int)$rating ) / (float) ($vote+1);
                 $response = $this->repository->rateIdea($ideaId, $newRating, $vote+1);
             }
-            // TODO: kirim email 
-            return new RateIdeaResponse($response);
+            $author = $this->repository->findAuthorByIdeaId($ideaId);
+            // TODO: kirim email
+            $this->mailerService
+                ->createMessage($author->getEmail(), "noreply@idy.com", "Rating Notification", "A user rated your idea!")
+                ->sendMessage();
+
+            return new RateIdeaResponse("Idea successfully rated.");
         } catch (\Exception $exception) {
             return new RateIdeaResponse($exception->getMessage(), TRUE);
         }
