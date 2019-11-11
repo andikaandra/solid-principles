@@ -2,9 +2,12 @@
 
 namespace Phalcon\Init\Dashboard\Controllers\Web;
 
-use Phalcon\Mvc\Controller;
+use Phalcon\Init\Common\Controllers\BaseController;
 
-class IdeaController extends Controller
+class IdeaController extends BaseController
 {
-
+    public function newIdeaAction()
+    {
+        $this->send(array('aa' => "wuaa"));
+    }
 }

@@ -7,7 +7,7 @@ return array(
         'apiControllerNamespace' => 'Phalcon\Init\Dashboard\Controllers\Api',
         'className' => 'Phalcon\Init\Dashboard\Module',
         'path' => APP_PATH . '/modules/dashboard/Module.php',
-        'defaultRouting' => true,
+        'defaultRouting' => false,
         'defaultController' => 'dashboard',
         'defaultAction' => 'index'
     ],
