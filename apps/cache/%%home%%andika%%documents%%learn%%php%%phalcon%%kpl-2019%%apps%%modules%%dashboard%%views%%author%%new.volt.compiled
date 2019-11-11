@@ -30,6 +30,7 @@
                     
     <h3 class="text-center">Register</h3>
     <br>
+    <?= $authViewModel->getIsAuthenticated() ?>
     <p><?php $this->flashSession->output() ?></p>
     <form action="<?= $this->url->get('dashboard/author/new') ?>" method="POST">
         <div class="form-group">

@@ -10,15 +10,17 @@ class IdeaData
     protected $title;
     protected $description;
     protected $rating;
+    protected $vote;
     protected $authorId;
     protected $authorName;
 
-    public function __construct($id, $title, $description, $rating, $authorId, $authorName)
+    public function __construct($id, $title, $description, $rating, $vote, $authorId = NULL, $authorName = NULL)
     {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
         $this->rating = $rating;
+        $this->vote = $vote;
         $this->authorId = $authorId;
         $this->authorName = $authorName;
     }
@@ -41,6 +43,11 @@ class IdeaData
     public function setRating($rating)
     {
         $this->rating = $rating;
+    }
+
+    public function setVote($vote)
+    {
+        $this->vote = $vote;
     }
 
     public function setAuthorId($authorId)
@@ -71,6 +78,11 @@ class IdeaData
     public function getRating()
     {
         return $this->rating;
+    }
+
+    public function getVote()
+    {
+        return $this->vote;
     }
 
     public function getAuthorId()

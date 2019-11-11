@@ -32,6 +32,13 @@ $router->addPost('/dashboard/author/login', [
     'action' => 'loginPost'
 ]);
 
+$router->addPost('/dashboard/author/logout', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'author',
+    'action' => 'logoutPost'
+]);
+
 
 // idea route 
 $router->addGet('/dashboard/idea/new', [
@@ -53,4 +60,11 @@ $router->addGet('/dashboard/idea/all', [
     'module' => 'dashboard',
     'controller' => 'idea',
     'action' => 'allIdea'
+]);
+
+$router->addPost('/dashboard/idea/rate', [
+    'namespace' => $namespace,
+    'module' => 'dashboard',
+    'controller' => 'idea',
+    'action' => 'rateIdeaPost'
 ]);

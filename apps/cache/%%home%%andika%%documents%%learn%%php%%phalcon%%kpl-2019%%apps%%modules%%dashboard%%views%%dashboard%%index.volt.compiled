@@ -30,8 +30,14 @@
                     
     <p><?php $this->flashSession->output() ?></p>
     <div class="list-group">
-        <a href="<?= $this->url->get('dashboard/author/new') ?>" class="list-group-item list-group-item-action">Register</a>
-        <a href="<?= $this->url->get('dashboard/author/login') ?>" class="list-group-item list-group-item-action">Login</a>
+        <?php if ($authViewModel->getIsAuthenticated()) { ?>
+        <form action="<?= $this->url->get('dashboard/author/logout') ?>" method="POST">
+            <button class="list-group-item list-group-item-action" type="submit">Logout</button>
+        </form>
+        <?php } else { ?>
+            <a href="<?= $this->url->get('dashboard/author/new') ?>" class="list-group-item list-group-item-action">Register</a>
+            <a href="<?= $this->url->get('dashboard/author/login') ?>" class="list-group-item list-group-item-action">Login</a>
+        <?php } ?>
         <a href="<?= $this->url->get('dashboard/idea/new') ?>" class="list-group-item list-group-item-action">New Idea</a>
         <a href="<?= $this->url->get('dashboard/idea/all') ?>" class="list-group-item list-group-item-action">All Idea</a>
     </div>

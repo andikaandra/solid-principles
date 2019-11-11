@@ -5,6 +5,8 @@ use Phalcon\Init\Dashboard\Infrastructure\Repositories\IdeasRepository;
 use Phalcon\Init\Dashboard\UseCases\AddAuthor\AddAuthorUseCase;
 use Phalcon\Init\Dashboard\UseCases\AddIdea\AddIdeaUseCase;
 use Phalcon\Init\Dashboard\UseCases\AllIdea\AllIdeaUseCase;
+use Phalcon\Init\Dashboard\UseCases\Login\LoginUseCase;
+use Phalcon\Init\Dashboard\UseCases\RateIdea\RateIdeaUseCase;
 
 use Phalcon\Escaper;
 use Phalcon\Http\Request;
@@ -26,6 +28,10 @@ $di->setShared('addNewAuthorUc', function () use ($di) {
     return new AddAuthorUseCase($di->get('authorsRepository'));
 });
 
+$di->setShared('loginUc', function () use ($di) {
+    return new LoginUseCase($di->get('authorsRepository'));
+});
+
 
 // idea usecase 
 $di->setShared('addNewIdeaUc', function () use ($di) {
@@ -34,6 +40,10 @@ $di->setShared('addNewIdeaUc', function () use ($di) {
 
 $di->setShared('allIdeaUc', function () use ($di) {
     return new AllIdeaUseCase($di->get('ideasRepository'));
+});
+
+$di->setShared('rateIdeaUc', function () use ($di) {
+    return new RateIdeaUseCase($di->get('ideasRepository'));
 });
 
 

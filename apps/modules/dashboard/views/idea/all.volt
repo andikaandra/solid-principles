@@ -70,7 +70,22 @@
             $('input[name ="rating"]').click(function() {
                 rate = $(this).val();
                 idea_id = $(this).closest("tr").data('idea')
-                alert(`you rate ${rate}`)
+                let data = {
+                    'rating' : rate,
+                    'idea_id' : idea_id,
+                }
+                $.ajax({
+                    url: "{{ url('dashboard/idea/rate') }}",
+                    type: 'POST',
+                    data: data,
+                    success: function(res){
+                        if ('error' in res){
+                            alert(res.error)
+                            return
+                        }
+                        alert(res.data)
+                    }
+                });
             })
         });
     </script>

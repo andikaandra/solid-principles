@@ -18,7 +18,7 @@ class AllIdeasDto
         $data = [];
         foreach ($this->data as $idea)
         {
-            $data [] = new IdeaData($idea['idea_id'], $idea['title'], $idea['description'], $idea['rating'], $idea['author_id'], $idea['author_name']);
+            $data [] = new IdeaData($idea['idea_id'], $idea['title'], $idea['description'], $idea['rating'], $idea['vote'], $idea['author_id'], $idea['author_name']);
         }
         return $data;
     }

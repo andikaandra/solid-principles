@@ -11,6 +11,8 @@ class WebController extends BaseController
         array('module' => 'dashboard', 'controller' => 'author', 'action' => 'loginPost' ),
         array('module' => 'dashboard', 'controller' => 'author', 'action' => 'newAuthor' ),
         array('module' => 'dashboard', 'controller' => 'author', 'action' => 'newAuthorPost' ),
+        array('module' => 'dashboard', 'controller' => 'dashboard', 'action' => 'index' ),
+        array('module' => 'dashboard', 'controller' => 'idea', 'action' => 'rateIdeaPost' ),
         array('module' => 'dashboard', 'controller' => 'idea', 'action' => 'allIdea' )
     );
 
