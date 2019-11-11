@@ -19,13 +19,13 @@
             color: #222222;
         }
 
-        .starrating > input:checked ~ label{ 
+        /* .starrating > input:checked ~ label{ 
             color: #ffca08 ; 
         }
 
         .starrating > input:hover ~ label{
             color: #ffca08 ; 
-        }
+        } */
     </style>
 {% endblock %}
 
@@ -51,33 +51,33 @@
                     <td>
                         <div class="starrating risingstar d-flex justify-content-center flex-row-reverse">
                             {% if idea.getRating() >=5 %}
-                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star" style="color: #ffca08"></label>
+                                <input type="radio" id="star5" name="rating" value="5" /><label class="rate" data-star="5" for="star5" title="5 star" style="color: #ffca08"></label>
                             {% else %}
-                                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 star"></label>
+                                <input type="radio" id="star5" name="rating" value="5" /><label class="rate" data-star="5" for="star5" title="5 star"></label>
                             {% endif %}
 
                             {% if idea.getRating() >=4 %}
-                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star" style="color: #ffca08"></label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label class="rate" data-star="4" for="star4" title="4 star" style="color: #ffca08"></label>
                             {% else %}
-                                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 star"></label>
+                                <input type="radio" id="star4" name="rating" value="4" /><label class="rate" data-star="4" for="star4" title="4 star"></label>
                             {% endif %}
 
                             {% if idea.getRating() >=3 %}
-                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star" style="color: #ffca08"></label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label class="rate" data-star="3" for="star3" title="3 star" style="color: #ffca08"></label>
                             {% else %}
-                                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 star"></label>
+                                <input type="radio" id="star3" name="rating" value="3" /><label class="rate" data-star="3" for="star3" title="3 star"></label>
                             {% endif %}
 
                             {% if idea.getRating() >=2 %}
-                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star" style="color: #ffca08"></label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label class="rate" data-star="2" for="star2" title="2 star" style="color: #ffca08"></label>
                             {% else %}
-                                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 star"></label>
+                                <input type="radio" id="star2" name="rating" value="2" /><label class="rate" data-star="2" for="star2" title="2 star"></label>
                             {% endif %}
 
                             {% if idea.getRating() >=1 %}
-                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star" style="color: #ffca08"></label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label class="rate" data-star="1" for="star1" title="1 star" style="color: #ffca08"></label>
                             {% else %}
-                                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 star"></label>
+                                <input type="radio" id="star1" name="rating" value="1" /><label class="rate" data-star="1" for="star1" title="1 star"></label>
                             {% endif %}
                         </div>
                     </td>
@@ -91,8 +91,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" integrity="sha256-KsRuvuRtUVvobe66OFtOQfjP8WA2SzYsmm4VPfMnxms=" crossorigin="anonymous"></script>
     <script type="application/javascript">
         $(document).ready(function() {
-            $('input[name ="rating"]').click(function() {
-                rate = $(this).val();
+            $('.rate').click(function() {
+                rate = $(this).data('star');
                 idea_id = $(this).closest("tr").data('idea')
                 let data = {
                     'rating' : rate,
