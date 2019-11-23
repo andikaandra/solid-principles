@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 11, 2019 at 01:36 
--- Server version: 5.7.27-0ubuntu0.18.04.1
+-- Generation Time: Nov 23, 2019 at 10:48 
+-- Server version: 5.7.28-0ubuntu0.18.04.4
 -- PHP Version: 7.3.11-1+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -35,6 +35,13 @@ CREATE TABLE `author` (
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `author`
+--
+
+INSERT INTO `author` (`author_id`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
+(1, 'andika andra', 'andikaandra03@gmail.com', 'andika123', '2019-11-23 22:42:34', '2019-11-23 22:42:34');
+
 -- --------------------------------------------------------
 
 --
@@ -45,11 +52,19 @@ CREATE TABLE `idea` (
   `idea_id` int(11) NOT NULL,
   `title` varchar(256) NOT NULL,
   `description` text,
-  `rating` decimal(10,0) NOT NULL,
+  `rating` varchar(100) NOT NULL DEFAULT '0',
+  `vote` int(11) DEFAULT '0',
   `author_id` int(11) NOT NULL,
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `idea`
+--
+
+INSERT INTO `idea` (`idea_id`, `title`, `description`, `rating`, `vote`, `author_id`, `created_at`, `updated_at`) VALUES
+(1, 'my submission', 'Describe your idea', '0', 0, 1, '2019-11-23 22:45:24', '2019-11-23 22:45:24');
 
 --
 -- Indexes for dumped tables
@@ -76,12 +91,12 @@ ALTER TABLE `idea`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `author_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `idea`
 --
 ALTER TABLE `idea`
-  MODIFY `idea_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idea_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
